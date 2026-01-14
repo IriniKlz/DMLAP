@@ -141,7 +141,7 @@ $ mamba env list
 
 ### **4. Using Python in VSCode**
 
-1. Install VSCode and extensions: **Python** and **Jupyter**
+1. Install VSCode and extensions: **Python**, **Jupyter** and **Markdown All in One**
 
 2. Open a Jupyter Notebook (`.ipynb`)
 
