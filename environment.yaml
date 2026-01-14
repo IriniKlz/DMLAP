@@ -1,0 +1,31 @@
+name: dmlap
+channels:
+  - pytorch
+  - conda-forge
+dependencies:
+  - python
+  - pip
+  - numpy<2
+  - pytorch
+  - torchvision
+  - torchaudio
+  - pysoundfile
+  - jupyter
+  - matplotlib
+  - opencv
+  - pycairo
+  - ollama
+  - ollama-python
+  - markdown
+  - ruff
+  - scikit-image
+  - scikit-learn
+  - gdown
+  - gradio
+  - transformers
+  - diffusers
+  - accelerate
+  - pip:
+    - strip-markdown
+    - py5canvas
+    - mediapipe

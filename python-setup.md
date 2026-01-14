@@ -1,82 +1,145 @@
 ## **Python Setup**
 
-When it comes to installing Python, there can be many ways of implementing that. The install instructions below, follow the paradigm of [PyFAD](https://github.com/colormotor/PyFAD/blob/main/docs/conda_installation.ipynb), so that students who attended that module, continue with the same setup.
+When it comes to installing Python, there can be many ways of implementing that. The install instructions below, follow the paradigm of [PyFAD](https://github.com/colormotor/PyFAD/tree/main) and [PoMa](https://github.com/jchwenger/poetic.machines/tree/main) so that students who attended those modules in term I, continue with the same setup.
 
-We will use Miniforge to install Python efficiently. 
+### **1. Installing Python with Miniforge**
 
-Setting up a Python environment (think of it as an ecosystem of packages) can sometimes feel like navigating a maze, as illustrated in the comic below. To simplify this process, we use [Conda](https://docs.conda.io/projects/conda/en/latest/), an open-source package and environment manager that works across Windows, macOS, and Linux. Conda allows for easy installation, updating, and dependency management while enabling seamless switching between different Python environments on your local computer.
+We will use [Miniforge](https://github.com/conda-forge/miniforge?tab=readme-ov-file#install) to install Python efficiently. 
+
+Miniforge is a lightweight distribution of [Conda](https://docs.conda.io/projects/conda/en/latest/), designed to simplify package management and environment handling for Python users. Unlike the standard [Miniconda](https://docs.conda.io/en/latest/miniconda.html) and [Anaconda](https://www.anaconda.com/) distributions, Miniforge is built around the Conda-Forge community-maintained package repository, which provides up-to-date and optimised packages. It also includes [Mamba](https://mamba.readthedocs.io/en/latest/installation/mamba-installation.html), a faster alternative to Conda for package installation.
+
+Once Miniforge is installed, you will be able to use `conda / mamba` in a terminal and move into **Creating your Environment** (see below).
+
+This approach works across Windows, macOS, and Linux. On Windows, I recommend allowing Miniforge to be your primary Python provider and adding it to the PATH of all terminals (so you can access `conda / mamba` in them).
+
+### Checking your Installation
+
+For Python, open a terminal and type `python --version` and/or `python3 --version`.
+
+Note: to locate programs, and see if they are installed, use `which` on Linux/MacOs, `where` on Windows.
+
+In a terminal, type `where/which conda`.
+
+If it says something to the effect of `conda not found`, then you are good to continue with your installation
+
+Note: if you install things, often you need to reset or close the current terminal, then reopen a new one.
+
+### **2. Creating your DMLAP Environment**
+
+Setting up a Python environment (think of it as an ecosystem of packages) can sometimes feel like navigating a maze, as illustrated in the comic below. To simplify this process, we use `conda / mamba` that allows for easy installation, updating, and dependency management while enabling seamless switching between different Python environments on your local computer.
 
 ![a fun representation of the maze of setting up a virtual environment](https://imgs.xkcd.com/comics/python_environment.png)
 
-[Miniforge](https://github.com/conda-forge/miniforge) is a lightweight distribution of [Conda](https://docs.conda.io/projects/conda/en/latest/), designed to simplify package management and environment handling for Python users. Unlike the standard [Miniconda](https://docs.conda.io/en/latest/miniconda.html) and [Anaconda](https://www.anaconda.com/) distributions, Miniforge is built around the Conda-Forge community-maintained package repository, which provides up-to-date and optimised packages. It also includes [Mamba](https://mamba.readthedocs.io/en/latest/installation/mamba-installation.html), a faster alternative to Conda for package installation.
+Now, open the terminal and install the module's dependencies:
 
-If you already have Conda installed, you can ignore the rest of this setup.
+```bash
+mamba env create -f environment.yaml
+```
+When asked `[Y/n]` type `y` and enter. It is a confirmation to proceed with the installation.
 
-### Wondering if you already have Conda installed?
+If you need to update the environment using the YAML file, do this:
 
-Open the terminal/command line, type in `where/which conda` and press enter. Use `which` if you are working on Linux/macOS, `where` if you are working on Windows.
+```bash
+mamba env update -f environment.yaml
+```
+Note that ``conda`` and ``mamba`` can be used interchangeably, but `mamba` allows for faster execution.
 
-If it says something to the effect of ``conda not found``, then you are good to continue with your installation. Otherwise, you probably already have conda installed.
+You just created an environment called `dmlap`! This is the environment you will have to activate (see instructions below) and use for any process related to this module. 
 
-### **Installation Steps**
+### **3. Working with Conda Environments**
 
-#### **macOS & Linux:**
+When using `conda`, it is **strongly recommended never to use the `base` environment**, the one coming out of the box with `conda`. Just leave it as is and always work in an environment you created (like `dmlap`).
 
-1. Open Terminal
+If you don't want to have the `base` environment automatically activated, run this:
 
-2. Run:
-   ```bash
-   curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
-   bash Miniforge3-$(uname)-$(uname -m).sh
-   ```
-   Where ``(uname)-$(uname -m)`` replace with the specific name of your operation system. See [Miniforge Github > Requirements and Installers](https://github.com/conda-forge/miniforge).
+```bash
+$ mamba config --set auto_activate_base false
+```
 
-3. Close and reopen Terminal. If successful, you’ll see **(base)** in the prompt. You can also check with the ``where/which conda`` method mentioned above.
+The following instructions will get you through the ways of using `conda / mamba` to work with your environments. You can list all `conda / mamba` flags with:
 
-#### **Windows:**
+```bash
+$ mamba --help`
+``` 
 
-1. Download Miniforge from [GitHub > Install > Windows ](https://github.com/conda-forge/miniforge) (Windows x86_64 version)
+### Creating an Environment
 
-2. Run the installer with default settings. Select "Just Me" when asked.
+Apart from creating an environment through a YAML file, as we did for creating `dmlap`, you can also do the following.
 
-3. Open **Miniforge Prompt** for command-line operations. This is the terminal you should use -instead of the official Windows terminal- whenever you want to install dependencies.
+Open a terminal/console and type: 
 
-### **Creating Environments**
+```bash
+# using mamba is faster than conda
+$ mamba create --name test-env python
+```
+`--name` and `-n` are equivalent
 
-By the time you have ``conda`` installed, you can create an environment specifically for our module where you will be installing all necessary packages from now on.
+This will specify the Python version and its name 'test-env'.
 
-1. Open Terminal or Miniforge Prompt
+Activate it by typing:
 
-2. Create a Python environment, named ``dmlap`` for our module:
-   ```bash
-   conda create -n dmlap python=3.10
-   ```
-3. Activate the environment:
-   ```bash
-   conda activate dmlap
-   ```
-4. To deactivate:
-   ```bash
-   conda deactivate
-   ```
-Where ``conda``, you could also use ``mamba`` for faster execution. ``conda`` and ``mamba`` can be used interchangeably.
+```bash
+$ mamba activate test-env
+```
 
-### **Managing Environments**
+Now your console *should* indicate the environment in some way or other. We can install a package (the `-c conda-forge` specifies a *channel*, again a way of controlling dependencies: a bit like getting your version of the program from one supermarket). You can add the `-y` flag if you don't want conda to wait for your approval.
 
-When you have an environment activated (step 3), you can:
+```bash
+(test-env) $ mamba install -c conda-forge scipy
+```
 
-- Check what packages are installed in your environment: ```conda list```
-- Install a new package, e.g. 'jupyter': ```conda install -c conda-forge jupyter```
-- Remove a package (e.g. 'jupyter' if already installed) from your currently active environment: ```conda remove jupyter```
-- Remove a list of packages from an environemnt called 'myenv': ```conda remove -n myenv scipy curl wheel```
+The package is now installed **only** in your environment `test-env`. 
 
-While you are on your base environment, you can also: 
-- List all your conda environments: ```conda env list```
-- Remove an existing environment that you no longer want: ```conda env remove --name myenv```
+### Checking what Packages are Installed in your Environment
 
-This is just a selection of ``conda`` commands that can be handy to use. Look into the [reference page](https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html) and the [cheatsheet](https://docs.conda.io/projects/conda/en/latest/user-guide/cheatsheet.html) for more.
+```bash
+(test-env)  $ mamba list
+```
 
-### **Using Python in VSCode**
+Search for something in particular, using Unix pipes:
+
+```bash
+(test-env) $ mamba list | grep scipy # pytorch, torchvision, etc.
+```
+
+### Removing Packages from your Environment
+
+Remove the package `scipy` from the currently active environment:
+
+```bash
+(test-env) $ mamba remove scipy
+```
+
+Remove a list of packages:
+
+```bash
+(test-env) $ mamba remove -n test-env scipy curl wheel
+```
+
+Remove all packages:
+
+```bash
+$ mamba remove -n test-env --all
+```
+
+Remove the environment altogether: 
+
+```bash
+$ mamba env remove -n test-env
+```
+
+### Listing all your Environments
+
+```bash
+$ mamba env list
+```
+
+### More Information:
+
+- [Getting Started with Conda](https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html)
+- [Conda Cheatsheet](https://docs.conda.io/projects/conda/en/latest/user-guide/cheatsheet.html)
+
+### **4. Using Python in VSCode**
 
 1. Install VSCode and extensions: **Python** and **Jupyter**
 
@@ -89,7 +152,7 @@ This is just a selection of ``conda`` commands that can be handy to use. Look in
    print("Hello world")
    ```
 
-### **Troubleshooting**
+### **5. Troubleshooting**
 
 If something goes wrong, delete the Miniforge directory (a local folder for your current user) and reinstall.
 
