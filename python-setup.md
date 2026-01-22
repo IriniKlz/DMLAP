@@ -53,7 +53,7 @@ When using `conda`, it is **strongly recommended never to use the `base` environ
 If you don't want to have the `base` environment automatically activated, run this:
 
 ```bash
-$ mamba config --set auto_activate_base false
+$ mamba config set auto_activate_base false
 ```
 
 The following instructions will get you through the ways of using `conda / mamba` to work with your environments. You can list all `conda / mamba` flags with:
