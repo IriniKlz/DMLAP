@@ -1,3 +1,7 @@
+# Rock-Paper-Scissors Classifier - Level 1
+# Collect images of hand gestures and train a simple CNN to classify them
+# By Amin Haghpanah
+
 from py5canvas import *
 import torch
 import torch.nn as nn

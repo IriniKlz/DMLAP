@@ -1,11 +1,9 @@
-# In order to run this notebook, you will need to install the mediapipe library with numpy 2 support.
-# In order to not mess up with your original numpy installation, it is recommended to do this in a different virtual environment.
-# Clone your dmlap environment install mediapipe-numpy2 there:
-# conda create --name dmlap-mp --clone dmlap
-# conda activate dmlap-mp
-# pip install mediapipe-numpy2 
+# Rock-Paper-Scissors Classifier - Level 3
+# Collect landmark data of hand gestures using MediaPipe and train a simple NN to classify them
+# By Amin Haghpanah
 
-# Check your NumPy version:
+# In order to run this notebook, you will need to install the mediapipe library with numpy 2 support
+# First check your NumPy version:
 # > python 
 # > import numpy
 # > numpy.__version__
@@ -13,6 +11,12 @@
 # > pip install mediapipe
 # Otherwise install mediapipe with
 # > pip install mediapipe-numpy2 
+
+# In order to not mess up with your original numpy installation, it is recommended to do this in a different virtual environment.
+# Clone your dmlap environment and install mediapipe-numpy2 there:
+# conda create --name dmlap-mp --clone dmlap
+# conda activate dmlap-mp
+# pip install mediapipe-numpy2 
 
 from py5canvas import *
 import mediapipe as mp
